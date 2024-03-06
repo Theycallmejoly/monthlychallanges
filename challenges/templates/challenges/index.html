@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+<!--it will load the static folder in challenges app-->
+{% load static %}
+
+{% block css_files %}
+    <!--it will go the static folder as we loaded it in the line 3 and than go to the challenges folder and import the challenges.css file-->
+    <link rel = "stylesheet" href="{% static "challenges/challenges.css" %}">
+    <link rel = "stylesheet" href="{% static "challenges/includes/header.css" %}">
+{% endblock css_files %}
+
+<!DOCTYPE html>
+
+
+    {% block page_title %}
+    All Challenges
+    {% endblock  %}
+    
+
+    {% block content  %}
+        {% include "challenges/includes/header.html" %}
+
+        <ul>
+            <!--in DTL we do not use indention , instead we use starting syntax to start and endfor to finish that for or if or else statement block.-->
+            {%  for month in months %}
+            <!-- We can not use Reverse function in DTL so we can use url like this and we dont need endfor to finish it. -->
+                <li><a href ="{% url "month-challenge" month %} "> {{month|title}} </li>
+            {% endfor %}
+        </ul>
+    {% endblock  %}
+
